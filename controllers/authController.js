@@ -1,21 +1,45 @@
-const {loginService} = require("../services/authService")
-
-function login(req,res){
-    const {username, password} = req.body;
-
-    const result = loginService(username,password);//sucess: true, token : edbfhvtrnboienqioe result = {success:true, token:hfbhetkjH}
-
-    if(!result.success){
-        return res.status(401).json(result)
+const authService = require('../services/authService')
+async function register(req,res){
+    try{
+        const user = await authService.register(req.body);
+        res.status(210).json({
+            success:true,
+            message:"user registered successfully",
+            data:user
+        })
     }
-
-    res.status(200).json({
-        message:"login succesfful",
-        token: result.token
-    });//sucess: true, token :"student-secret-token"
-
+    catch(error){
+        res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
 }
 
-module.exports = {
+async function login(req,res){
+    try{
+        const user = await authService.login(req.body);//bob@gmail.com bob
+
+        if(!user){
+            return res.status(401).json({
+                success: false,
+                message:"invaild email or password"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            message:"login succesfull",
+            data:user
+        });
+    }
+    catch(error){
+        res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+module.exports = {register,
     login
 }
