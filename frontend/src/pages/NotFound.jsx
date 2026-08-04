@@ -1,9 +1,12 @@
-import React from 'react'
+import { Link } from "react-router-dom";
 
-const NotFound = () => {
+export default function NotFound() {
   return (
-    <div>NotFound</div>
-  )
+    <div className="container">
+      <div className="card">
+        <h2>404 - Page Not Found</h2>
+        <Link to="/">Go back home</Link>
+      </div>
+    </div>
+  );
 }
-
-export default NotFound

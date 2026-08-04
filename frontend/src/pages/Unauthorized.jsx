@@ -1,9 +1,13 @@
-import React from 'react'
+import { Link } from "react-router-dom";
 
-const Unauthorized = () => {
+export default function Unauthorized() {
   return (
-    <div>Unauthorized</div>
-  )
+    <div className="container">
+      <div className="card">
+        <h2>Access Denied</h2>
+        <p>You do not have permission to view this page.</p>
+        <Link to="/">Go back home</Link>
+      </div>
+    </div>
+  );
 }
-
-export default Unauthorized
