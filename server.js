@@ -1,11 +1,14 @@
 const express = require('express')
+const cors = require("cors")
 require("dotenv").config()
 const userRoutes = require("./routes/userRoute")
 const authRoutes = require('./routes/authRoutes')
 const eventRoutes = require('./routes/eventRoute')
+const registartionRoute = require('./routes/registrationRoute')
+const reportRoute=require('./routes/reportRoute')
 const db= require("./config/db")
 const app = express()
-
+app.use(cors())
 app.use(express.json())
 
 
@@ -33,6 +36,10 @@ app.use("/users",userRoutes);
 app.use('/auth',authRoutes);
 
 app.use('/events',eventRoutes)
+
+app.use('/registrations',registartionRoute)
+
+app.use('/reports',reportRoute)
 
 const PORT = process.env.PORT || 3000
 

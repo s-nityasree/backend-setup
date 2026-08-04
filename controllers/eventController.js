@@ -61,8 +61,78 @@ async function getEventById(req,res){
     }
 }
 
+async function updateEvent(req, res) {
+
+    try {
+
+        const { id } = req.params;
+
+        const updatedEvent = await eventService.updateEvent(id, req.body);
+
+        if (!updatedEvent) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Event Not Found"
+            });
+
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Event Updated Successfully",
+            data: updatedEvent
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+}
+
+// Delete Event
+async function deleteEvent(req, res) {
+
+    try {
+
+        const { id } = req.params;
+
+        const deleted = await eventService.deleteEvent(id);
+
+        if (!deleted) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Event Not Found"
+            });
+
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Event Deleted Successfully"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+}
+
 module.exports = {
     createEvent,
     getAllEvents,
-    getEventById
-}
+    getEventById,
+    updateEvent,
+    deleteEvent
+};

@@ -47,7 +47,7 @@ async function login(loginData){
 
     const user = rows[0]//ajay@gmail.com eaxrstdyugbiokbvjchg
 
-    const isMatch = await bcrypt.compare(password, user.password)//ajay ajay
+    const isMatch = await bcrypt.compare(password, user.password)//bob bob
 
     if(!isMatch){
         throw new Error("invaild email or password")

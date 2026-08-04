@@ -10,4 +10,10 @@ router.get('/',verifyToken,eventController.getAllEvents)
 
 router.get('/:id',verifyToken,eventController.getEventById)
 
+router.put("/:id",  verifyToken,
+    authorizeRoles("ADMIN"),eventController.updateEvent);
+
+router.delete("/:id",  verifyToken,
+    authorizeRoles("ADMIN"),eventController.deleteEvent);
+
 module.exports = router;

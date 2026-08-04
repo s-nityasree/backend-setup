@@ -38,8 +38,85 @@ async function getEventById(id){
     return rows[0];
 }
 
+async function updateEvent(id, eventData) {
+
+    const {
+        title,
+        description,
+        event_date,
+        venue,
+        max_seats,
+        created_by
+    } = eventData;
+
+    const query = `
+        UPDATE events
+        SET
+        title=?,
+        description=?,
+        event_date=?,
+        venue=?,
+        max_seats=?,
+        created_by=?
+        WHERE id=?
+    `;
+
+    const [result] = await db.query(query, [
+
+        title,
+        description,
+        event_date,
+        venue,
+        max_seats,
+        created_by,
+        id
+
+    ]);
+
+    if (result.affectedRows === 0) {
+
+        return null;
+
+    }
+
+    return {
+
+        id,
+        title,
+        description,
+        event_date,
+        venue,
+        max_seats,
+        created_by
+
+    };
+
+}
+
+// Delete Event
+async function deleteEvent(id) {
+
+    const [result] = await db.query(
+        "DELETE FROM events WHERE id=?",
+        [id]
+    );
+
+    if (result.affectedRows === 0) {
+
+        return false;
+
+    }
+
+    return true;
+
+}
+
 module.exports = {
+
     createEvent,
     getAllEvents,
-    getEventById
-}
+    getEventById,
+    updateEvent,
+    deleteEvent
+
+};
