@@ -96,10 +96,12 @@ async function updateEvent(id, eventData) {
 // Delete Event
 async function deleteEvent(id) {
 
-    const [result] = await db.query(
-        "DELETE FROM events WHERE id=?",
+    await db.query(
+        "DELETE FROM registrations WHERE event_id=?",
         [id]
     );
+
+    const [result] = await db.query("DELETE FROM events WHERE id = ?",[id])
 
     if (result.affectedRows === 0) {
 
