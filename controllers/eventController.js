@@ -3,6 +3,7 @@ const eventService = require("../services/eventService")
 async function createEvent(req,res){
     try{
         const event = await eventService.createEvent(req.body, req.user.id)//req.user =1 ajay ajay@gmail.com admin
+        console.log(event, "event in line 6")
 
         res.status(201).json({
             success:true,

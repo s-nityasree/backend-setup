@@ -114,7 +114,7 @@ export default function Register() {
               onChange={handleChange}
             >
               <option value="STUDENT">Student</option>
-              <option value="FACULTY">Faculty</option>
+              <option value="FCAULTY">Faculty</option>
               <option value="ADMIN">Admin</option>
             </select>
           </div>

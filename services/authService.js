@@ -13,7 +13,8 @@ async function register(userData){
         throw new Error("Email already exists! please login")
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10)//12345--> knyutfrdhtwtrstcdryfg 
+    const hashedPassword = await bcrypt.hash(password, 10)//olly if the email is not present in db
+    console.log(hashedPassword,"hashed password in line 17")
 
     const query = `
     INSERT INTO users(name,email,password,role)

@@ -1,0 +1,45 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: student-mysql
+    restart: always
+    env_file:
+      - mysql.env
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - student-network
+
+  backend:
+    build: .
+    container_name: stu-mgmt-backend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    networks:
+      - student-network
+
+  frontend:
+    build: ./frontend
+    container_name: stu-mgmt-frontend
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - student-network
+
+volumes:
+  mysql-data:
+    external: true
+    name: 52adbb2fb76ff93bba9b4a88f9c7e3d55f9a08da6c8b9031d427976251e86b9e
+
+networks:
+  student-network:

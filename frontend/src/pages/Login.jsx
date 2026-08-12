@@ -30,7 +30,7 @@ export default function Login() {
       // Redirect based on role after successful login
       if (loggedInUser.role === "ADMIN") navigate("/admin");
       else if (loggedInUser.role === "STUDENT") navigate("/student");
-      else if (loggedInUser.role === "FACULTY") navigate("/faculty");
+      else if (loggedInUser.role === "FCAULTY") navigate("/faculty");
       else navigate("/");
     } catch (err) {
       const message =

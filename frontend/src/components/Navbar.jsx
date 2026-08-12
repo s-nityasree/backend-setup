@@ -20,7 +20,7 @@ export default function Navbar() {
         {isAuthenticated && user.role === "STUDENT" && (
           <Link to="/student">Student Dashboard</Link>
         )}
-        {isAuthenticated && user.role === "FACULTY" && (
+        {isAuthenticated && user.role === "FCAULTY" && (
           <Link to="/faculty">Faculty Dashboard</Link>
         )}
       </div>
